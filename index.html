@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Pembelajaran Interaktif - Husnuzan</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Vue 3 CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0fdf4;
+        }
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased">
+    <div id="app" class="min-h-screen flex flex-col">
+        <!-- Header / Navigation -->
+        <header class="bg-emerald-700 text-white shadow-lg sticky top-0 z-50">
+            <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col md:flex-row justify-between items-center gap-3">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-amber-400 text-emerald-900 p-2.5 rounded-xl text-xl font-bold">
+                        <i class="fa-solid fa-book-quran"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold tracking-wide">Media Pembelajaran PAI</h1>
+                        <p class="text-xs text-emerald-100">Materi: Memahami & Mengamalkan Sikap Husnuzan</p>
+                    </div>
+                </div>
+                <!-- Navigation Tabs -->
+                <nav class="flex flex-wrap gap-1 bg-emerald-800 p-1.5 rounded-xl text-xs md:text-sm">
+                    <button @click="currentTab = 'materi'" :class="currentTab === 'materi' ? 'bg-amber-400 text-emerald-950 font-bold shadow' : 'text-emerald-100 hover:bg-emerald-700'" class="px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5">
+                        <i class="fa-solid fa-lightbulb"></i> Materi
+                    </button>
+                    <button @click="currentTab = 'flashcard'" :class="currentTab === 'flashcard' ? 'bg-amber-400 text-emerald-950 font-bold shadow' : 'text-emerald-100 hover:bg-emerald-700'" class="px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5">
+                        <i class="fa-solid fa-clone"></i> Flashcards
+                    </button>
+                    <button @click="currentTab = 'pg'" :class="currentTab === 'pg' ? 'bg-amber-400 text-emerald-950 font-bold shadow' : 'text-emerald-100 hover:bg-emerald-700'" class="px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5">
+                        <i class="fa-solid fa-list-check"></i> Kuis PG (25)
+                    </button>
+                    <button @click="currentTab = 'isian'" :class="currentTab === 'isian' ? 'bg-amber-400 text-emerald-950 font-bold shadow' : 'text-emerald-100 hover:bg-emerald-700'" class="px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5">
+                        <i class="fa-solid fa-pen-to-square"></i> Isian (10)
+                    </button>
+                    <button @click="currentTab = 'hasil'" :class="currentTab === 'hasil' ? 'bg-amber-400 text-emerald-950 font-bold shadow' : 'text-emerald-100 hover:bg-emerald-700'" class="px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5">
+                        <i class="fa-solid fa-trophy"></i> Hasil
+                    </button>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content Container -->
+        <main class="flex-grow max-w-5xl w-full mx-auto p-4 md:p-6">
+
+            <!-- TAB 1: MODUL MATERI -->
+            <section v-if="currentTab === 'materi'" class="space-y-6">
+                <!-- Hero Banner -->
+                <div class="bg-gradient-to-r from-emerald-600 to-teal-700 rounded-2xl p-6 text-white shadow-md relative overflow-hidden">
+                    <div class="relative z-10">
+                        <span class="bg-emerald-800 text-amber-300 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Ringkasan Konsep Utama</span>
+                        <h2 class="text-2xl md:text-3xl font-bold mt-2">Mengenal Akhlak Terpuji: Husnuzan</h2>
+                        <p class="text-emerald-100 text-sm mt-2 max-w-2xl">
+                            Husnuzan adalah pilar mental & spiritual seorang muslim untuk senantiasa berpikir positif, menjaga kedamaian hati, dan membina hubungan harmonis dengan Allah, sesama, serta diri sendiri.
+                        </p>
+                        <button @click="speakText('Husnuzan artinya berprasangka baik. Lawan kata dari husnuzan adalah suuzan yang artinya berprasangka buruk.')" class="mt-4 bg-amber-400 hover:bg-amber-500 text-emerald-950 font-bold text-xs px-4 py-2 rounded-lg flex items-center gap-2 shadow">
+                            <i class="fa-solid fa-volume-high"></i> Dengarkan Penjelasan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Content Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <!-- Card 1 -->
+                    <div class="bg-white rounded-xl p-5 shadow-sm border border-emerald-100 hover:shadow-md transition">
+                        <div class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-xl font-bold mb-3">
+                            <i class="fa-solid fa-hands-praying"></i>
+                        </div>
+                        <h3 class="font-bold text-emerald-900 text-lg mb-2">1. Husnuzan kepada Allah</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Berprasangka baik terhadap segala keputusan, takdir, dan ujian dari Allah. Meyakini bahwa setiap musibah atau kegagalan pasti memiliki <b>hikmah tersembunyi</b> dan Allah Maha Pengasih lagi Maha Penyayang.
+                        </p>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="bg-white rounded-xl p-5 shadow-sm border border-emerald-100 hover:shadow-md transition">
+                        <div class="w-10 h-10 rounded-lg bg-teal-100 text-teal-700 flex items-center justify-center text-xl font-bold mb-3">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <h3 class="font-bold text-emerald-900 text-lg mb-2">2. Husnuzan kepada Sesama</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Menilai orang lain dengan prasangka baik, tidak terburu-buru menuduh tanpa bukti, serta mencari alasan positif saat terjadi kesalahpahaman untuk mencegah konflik sosial.
+                        </p>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="bg-white rounded-xl p-5 shadow-sm border border-emerald-100 hover:shadow-md transition">
+                        <div class="w-10 h-10 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center text-xl font-bold mb-3">
+                            <i class="fa-solid fa-user-check"></i>
+                        </div>
+                        <h3 class="font-bold text-emerald-900 text-lg mb-2">3. Husnuzan kepada Diri Sendiri</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Menghargai usaha diri, percaya pada potensi yang diberikan Allah, tidak gampang putus asa saat gagal, serta memandang kegagalan sebagai sarana belajar dan berkembang.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Perbandingan Husnuzan vs Suuzan -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-emerald-100">
+                    <h3 class="font-bold text-slate-800 text-lg mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-scale-balanced text-emerald-600"></i> Perbandingan Akhlak Mahmudah vs Akhlak Mazmumah
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-emerald-50 border-l-4 border-emerald-500 p-4 rounded-r-xl">
+                            <h4 class="font-bold text-emerald-800 flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-emerald-600"></i> Husnuzan (Akhlak Mahmudah)
+                            </h4>
+                            <ul class="text-xs text-emerald-900 mt-2 space-y-1.5 list-disc list-inside">
+                                <li>Berprasangka baik dan berpikiran positif.</li>
+                                <li>Menciptakan hubungan harmonis dan kedamaian.</li>
+                                <li>Meningkatkan rasa syukur dan ketenangan jiwa.</li>
+                                <li>Menerima takdir dengan ikhlas dan lapang dada.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-rose-50 border-l-4 border-rose-500 p-4 rounded-r-xl">
+                            <h4 class="font-bold text-rose-800 flex items-center gap-2">
+                                <i class="fa-solid fa-circle-xmark text-rose-600"></i> Suuzan (Akhlak Mazmumah)
+                            </h4>
+                            <ul class="text-xs text-rose-900 mt-2 space-y-1.5 list-disc list-inside">
+                                <li>Berprasangka buruk dan curiga berlebihan.</li>
+                                <li>Menimbulkan perpecahan, iri, dan konflik.</li>
+                                <li>Membuat jiwa cemas, gelisah, dan pesimis.</li>
+                                <li>Sering mengeluh dan menyalahkan keadaan.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: FLASHCARDS -->
+            <section v-if="currentTab === 'flashcard'" class="space-y-6">
+                <div class="text-center max-w-xl mx-auto">
+                    <h2 class="text-2xl font-bold text-emerald-900">Kartu Pengingat Istilah (Flashcards)</h2>
+                    <p class="text-xs text-slate-500 mt-1">Klik kartu untuk membalik dan melihat penjelasan singkatnya.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                    <div v-for="(card, idx) in flashcards" :key="idx" 
+                         @click="card.flipped = !card.flipped" 
+                         class="h-48 perspective-1000 cursor-pointer">
+                        <div class="relative w-full h-full duration-500 transform-style-3d transition-transform rounded-2xl shadow-sm border border-emerald-100"
+                             :class="{ 'rotate-y-180': card.flipped }">
+                            <!-- Depan -->
+                            <div class="absolute w-full h-full backface-hidden bg-white rounded-2xl p-5 flex flex-col items-center justify-center text-center border-b-4 border-emerald-500">
+                                <span class="text-emerald-600 font-semibold text-xs uppercase tracking-wider mb-2">Istilah {{ idx + 1 }}</span>
+                                <h3 class="text-xl font-bold text-slate-800">{{ card.term }}</h3>
+                                <p class="text-xs text-slate-400 mt-3"><i class="fa-solid fa-rotate"></i> Klik untuk balik</p>
+                            </div>
+                            <!-- Belakang -->
+                            <div class="absolute w-full h-full backface-hidden bg-emerald-700 text-white rounded-2xl p-5 flex flex-col items-center justify-center text-center rotate-y-180">
+                                <h4 class="font-bold text-amber-300 text-sm mb-2">{{ card.term }}</h4>
+                                <p class="text-xs text-emerald-50 leading-relaxed">{{ card.definition }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 3: KUIS PILIHAN GANDA (25 SOAL) -->
+            <section v-if="currentTab === 'pg'" class="space-y-6">
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-emerald-100 flex flex-wrap justify-between items-center gap-3">
+                    <div>
+                        <span class="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md">Soal {{ currentPgIndex + 1 }} dari {{ pgQuestions.length }}</span>
+                        <h2 class="text-lg font-bold text-slate-800 mt-1">Kuis Pilihan Ganda LKPD</h2>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="text-xs bg-slate-100 text-slate-600 px-3 py-1.5 rounded-lg font-medium">
+                            <i class="fa-solid fa-circle-check text-emerald-600"></i> Terjawab: {{ countAnsweredPg }} / 25
+                        </div>
+                        <button @click="resetPgQuiz" class="text-xs text-rose-600 hover:text-rose-800 font-medium underline">
+                            Reset Kuis
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                    <div class="bg-emerald-600 h-full transition-all duration-300" :style="{ width: ((currentPgIndex + 1) / pgQuestions.length * 100) + '%' }"></div>
+                </div>
+
+                <!-- Question Card -->
+                <div class="bg-white rounded-2xl shadow-md p-6 border border-emerald-100">
+                    <p class="text-xs text-emerald-700 font-semibold mb-1">Pertanyaan Nomor {{ pgQuestions[currentPgIndex].id }}</p>
+                    <h3 class="text-base md:text-lg font-bold text-slate-800 leading-snug mb-5">
+                        {{ pgQuestions[currentPgIndex].question }}
+                    </h3>
+
+                    <!-- Options -->
+                    <div class="space-y-3">
+                        <button v-for="(opt, oKey) in pgQuestions[currentPgIndex].options" :key="oKey"
+                                @click="selectPgOption(currentPgIndex, oKey)"
+                                :disabled="pgQuestions[currentPgIndex].userAnswer !== null"
+                                :class="getPgOptionClass(currentPgIndex, oKey)"
+                                class="w-full text-left p-3.5 rounded-xl border transition-all text-sm flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <span class="w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs uppercase"
+                                      :class="pgQuestions[currentPgIndex].userAnswer === oKey ? 'bg-emerald-700 text-white' : 'bg-slate-100 text-slate-700'">
+                                    {{ oKey }}
+                                </span>
+                                <span class="font-medium">{{ opt }}</span>
+                            </div>
+                            <span v-if="pgQuestions[currentPgIndex].userAnswer !== null">
+                                <i v-if="oKey === pgQuestions[currentPgIndex].correct" class="fa-solid fa-circle-check text-emerald-600 text-lg"></i>
+                                <i v-else-if="pgQuestions[currentPgIndex].userAnswer === oKey" class="fa-solid fa-circle-xmark text-rose-500 text-lg"></i>
+                            </span>
+                        </button>
+                    </div>
+
+                    <!-- Pembahasan (jika sudah dijawab) -->
+                    <div v-if="pgQuestions[currentPgIndex].userAnswer !== null" class="mt-5 p-4 rounded-xl text-xs leading-relaxed"
+                         :class="pgQuestions[currentPgIndex].userAnswer === pgQuestions[currentPgIndex].correct ? 'bg-emerald-50 text-emerald-900 border border-emerald-200' : 'bg-rose-50 text-rose-900 border border-rose-200'">
+                        <p class="font-bold mb-1 flex items-center gap-1.5">
+                            <i class="fa-solid fa-circle-info"></i> Pembahasan:
+                        </p>
+                        <p>{{ pgQuestions[currentPgIndex].explanation }}</p>
+                    </div>
+
+                    <!-- Question Controls -->
+                    <div class="mt-6 flex justify-between items-center pt-4 border-t border-slate-100">
+                        <button @click="currentPgIndex--" :disabled="currentPgIndex === 0"
+                                class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 disabled:opacity-40">
+                            <i class="fa-solid fa-arrow-left mr-1"></i> Sebelumnya
+                        </button>
+                        
+                        <div class="flex gap-1 overflow-x-auto max-w-xs md:max-w-md py-1">
+                            <button v-for="(q, i) in pgQuestions" :key="i"
+                                    @click="currentPgIndex = i"
+                                    :class="getPgNavBadgeClass(i)"
+                                    class="w-7 h-7 text-xs font-bold rounded-lg flex items-center justify-center flex-shrink-0 transition">
+                                {{ i + 1 }}
+                            </button>
+                        </div>
+
+                        <button @click="currentPgIndex++" :disabled="currentPgIndex === pgQuestions.length - 1"
+                                class="px-4 py-2 rounded-xl text-xs font-semibold bg-emerald-600 text-white hover:bg-emerald-700 disabled:opacity-40">
+                            Berikutnya <i class="fa-solid fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 4: LATIHAN ISIAN (10 SOAL) -->
+            <section v-if="currentTab === 'isian'" class="space-y-6">
+                <div class="bg-white p-5 rounded-2xl shadow-sm border border-emerald-100">
+                    <h2 class="text-xl font-bold text-emerald-900">Latihan Isian Singkat (Bagian II)</h2>
+                    <p class="text-xs text-slate-500 mt-1">Ketik jawabanmu pada kolom yang tersedia, lalu klik tombol "Cek Jawaban".</p>
+                </div>
+
+                <div class="space-y-4">
+                    <div v-for="(q, idx) in isianQuestions" :key="idx" class="bg-white p-5 rounded-2xl shadow-sm border border-emerald-100">
+                        <div class="flex justify-between items-start gap-2 mb-2">
+                            <span class="text-xs font-bold bg-emerald-100 text-emerald-800 px-2.5 py-0.5 rounded-full">Soal {{ idx + 1 }}</span>
+                            <button @click="q.showHint = !q.showHint" class="text-xs text-amber-600 hover:text-amber-800 font-medium">
+                                <i class="fa-solid fa-lightbulb"></i> {{ q.showHint ? 'Sembunyikan Petunjuk' : 'Petunjuk' }}
+                            </button>
+                        </div>
+
+                        <p class="text-sm font-semibold text-slate-800 mb-3">{{ q.question }}</p>
+
+                        <!-- Hint Box -->
+                        <div v-if="q.showHint" class="mb-3 text-xs bg-amber-50 text-amber-800 p-2.5 rounded-lg border border-amber-200">
+                            💡 <b>Petunjuk:</b> {{ q.hint }}
+                        </div>
+
+                        <!-- Input and Action -->
+                        <div class="flex flex-col sm:flex-row gap-2">
+                            <input type="text" v-model="q.userAnswer" :disabled="q.isChecked"
+                                   placeholder="Ketik jawaban di sini..."
+                                   class="flex-grow text-sm px-3.5 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 disabled:bg-slate-50">
+                            
+                            <button v-if="!q.isChecked" @click="checkIsian(q)" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs px-4 py-2 rounded-xl transition shadow-sm">
+                                Cek Jawaban
+                            </button>
+                            <button v-else @click="q.isChecked = false" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold text-xs px-3 py-2 rounded-xl transition">
+                                Coba Lagi
+                            </button>
+                        </div>
+
+                        <!-- Feedback Result -->
+                        <div v-if="q.isChecked" class="mt-3 text-xs p-3 rounded-xl flex items-center justify-between"
+                             :class="q.isCorrect ? 'bg-emerald-100 text-emerald-900 border border-emerald-300' : 'bg-rose-100 text-rose-900 border border-rose-300'">
+                            <div class="flex items-center gap-2">
+                                <i :class="q.isCorrect ? 'fa-solid fa-circle-check text-emerald-600' : 'fa-solid fa-circle-xmark text-rose-600'" class="text-base"></i>
+                                <div>
+                                    <p class="font-bold">{{ q.isCorrect ? 'Jawaban Benar!' : 'Jawaban Belum Tepat' }}</p>
+                                    <p class="text-slate-600 mt-0.5">Kunci Jawaban: <b>{{ q.correctAnswers.join(' / ') }}</b></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 5: LAPORAN & HASIL -->
+            <section v-if="currentTab === 'hasil'" class="space-y-6">
+                <div class="bg-white p-6 rounded-2xl shadow-md border border-emerald-100 text-center max-w-2xl mx-auto">
+                    <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-3xl mx-auto mb-3 shadow-inner">
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-slate-800">Laporan Evaluasi Pembelajaran</h2>
+                    <p class="text-xs text-slate-500 mt-1">Ringkasan hasil pengerjaan kuis Pilihan Ganda & Isian LKPD</p>
+
+                    <!-- Score Overview -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 my-6">
+                        <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-200">
+                            <p class="text-xs text-emerald-700 font-semibold">Skor Pilihan Ganda</p>
+                            <p class="text-2xl font-bold text-emerald-900 mt-1">{{ calculatePgScore() }} / 100</p>
+                            <p class="text-[10px] text-emerald-600 mt-0.5">{{ countCorrectPg }} dari 25 Benar</p>
+                        </div>
+                        <div class="bg-teal-50 p-4 rounded-xl border border-teal-200">
+                            <p class="text-xs text-teal-700 font-semibold">Skor Isian Singkat</p>
+                            <p class="text-2xl font-bold text-teal-900 mt-1">{{ calculateIsianScore() }} / 100</p>
+                            <p class="text-[10px] text-teal-600 mt-0.5">{{ countCorrectIsian }} dari 10 Benar</p>
+                        </div>
+                        <div class="bg-amber-50 p-4 rounded-xl border border-amber-200 col-span-2 sm:col-span-1">
+                            <p class="text-xs text-amber-700 font-semibold">Nilai Akhir Gabungan</p>
+                            <p class="text-2xl font-bold text-amber-900 mt-1">{{ Math.round((calculatePgScore() + calculateIsianScore()) / 2) }}</p>
+                            <p class="text-[10px] text-amber-700 mt-0.5 font-bold uppercase">{{ getGrade() }}</p>
+                        </div>
+                    </div>
+
+                    <!-- Grade Badge & Encouragement -->
+                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 leading-relaxed mb-5">
+                        <p class="font-bold text-sm text-emerald-800 mb-1">Catatan Evaluasi:</p>
+                        <p>{{ getEncouragementText() }}</p>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex flex-wrap justify-center gap-3">
+                        <button @click="currentTab = 'pg'" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow transition">
+                            <i class="fa-solid fa-redo mr-1"></i> Ulangi Kuis PG
+                        </button>
+                        <button @click="window.print()" class="bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow transition">
+                            <i class="fa-solid fa-print mr-1"></i> Cetak / Simpan Hasil
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-emerald-900 text-emerald-200 text-xs py-4 text-center mt-auto border-t border-emerald-800">
+            <p>Media Pembelajaran Interaktif PAI & Budi Pekerti — KTSP / Kurikulum Merdeka</p>
+            <p class="text-[10px] text-emerald-400 mt-0.5">Dikembangkan dari LKPD Tugas Sumatif Husnuzan</p>
+        </footer>
+    </div>
+
+    <!-- Vue App Script -->
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    currentTab: 'materi',
+                    currentPgIndex: 0,
+                    
+                    // Flashcards
+                    flashcards: [
+                        { term: 'Husnuzan', definition: 'Berprasangka baik dan selalu berpikiran positif terhadap keputusan Allah, sesama manusia, maupun diri sendiri.', flipped: false },
+                        { term: 'Suuzan', definition: 'Lawan dari husnuzan, yaitu berprasangka buruk, curiga berlebihan, dan berpikiran negatif.', flipped: false },
+                        { term: 'Akhlak Mahmudah', definition: 'Sifat-sifat atau perilaku yang terpuji, baik, dan mulia dalam ajaran Islam.', flipped: false },
+                        { term: 'Akhlak Mazmumah', definition: 'Sifat-sifat atau perilaku tercela yang dilarang karena merugikan diri sendiri dan orang lain.', flipped: false },
+                        { term: 'Hikmah Ujian', definition: 'Kebaikan dan pelajaran tersembunyi di balik setiap kesulitan atau musibah yang Allah berikan.', flipped: false },
+                        { term: 'Maha Pengasih & Penyayang', definition: 'Sifat mulia Allah SWT (Ar-Rahman & Ar-Rahim) yang menjadi dasar utama keyakinan berhusnuzan.', flipped: false }
+                    ],
+
+                    // 25 Soal Pilihan Ganda dari LKPD
+                    pgQuestions: [
+                        {
+                            id: 1,
+                            question: "Arti dari husnuzan adalah ...",
+                            options: { a: "berprasangka buruk", b: "menyebarkan berita", c: "berprasangka baik", d: "berinteraksi sosial" },
+                            correct: "c",
+                            userAnswer: null,
+                            explanation: "Husnuzan berasal dari bahasa Arab (Husnu = baik, Zan = prasangka), artinya berprasangka baik."
+                        },
+                        {
+                            id: 2,
+                            question: "Lawan dari husnuzan adalah...",
+                            options: { a: "suuzan", b: "istiqamah", c: "suul khatimah", d: "husnul khatimah" },
+                            correct: "a",
+                            userAnswer: null,
+                            explanation: "Lawan dari husnuzan (berprasangka baik) adalah suuzan (berprasangka buruk)."
+                        },
+                        {
+                            id: 3,
+                            question: "Bagas selalu husnudzan kepada teman-teman. Arti dari 'husnudzan' adalah....",
+                            options: { a: "Berprasangka baik", b: "Berprasangka jelek", c: "Berpikir positif", d: "beristiqamah" },
+                            correct: "a",
+                            userAnswer: null,
+                            explanation: "Husnuzan berarti berprasangka baik kepada orang lain dalam segala keadaan."
+                        },
+                        {
+                            id: 4,
+                            question: "Mengapa husnuzan dianggap penting dalam kehidupan sehari-hari?",
+                            options: { a: "Memperkuat sikap pesimis", b: "Menghindari tanggung jawab", c: "Meningkatkan rasa tidak percaya", d: "Mengurangi konflik dan menciptakan hubungan yang harmonis" },
+                            correct: "d",
+                            userAnswer: null,
+                            explanation: "Husnuzan menciptakan kedamaian, saling percaya, serta mencegah salah paham dan konflik."
+                        },
+                        {
+                            id: 5,
+                            question: "Berikut ini yang termasuk contoh husnuzan dalam situasi sehari-hari adalah...",
+                            options: { a: "Berpikir bahwa seseorang mungkin terlambat karena ada kendala yang tak terduga", b: "Mengira teman terlambat karena tidak peduli dengan janji", c: "Langsung menuduh seseorang berbohong tanpa bukti", d: "Menyebarkan rumor negatif tentang orang lain" },
+                            correct: "a",
+                            userAnswer: null,
+                            explanation: "Memberikan kepemakluman dan mencari alasan positif atas tindakan orang lain adalah bentuk husnuzan."
+                        },
+                        {
+                            id: 6,
+                            question: "Perhatikan pernyataan:\n(1) Fokus pada kesalahan orang lain\n(2) Mengkritik orang lain secara terbuka\n(3) Mencari sisi positif dari setiap kejadian\n(4) Menghindari segala bentuk interaksi sosial\nCara seseorang bisa mengembangkan sikap husnuzan ditunjukkan nomor...",
+                            options: { a: "(1)", b: "(2)", c: "(3)", d: "(4)" },
+                            correct: "c",
+                            userAnswer: null,
+                            explanation: "Mencari sisi positif dari setiap kejadian adalah langkah nyata untuk membiasakan husnuzan."
+                        },
+                        {
+                            id: 7,
+                            question: "Dampak buruk jika TIDAK memiliki sikap husnuzan (berprasangka buruk) adalah ....",
+                            options: { a: "Meningkatkan rasa kebersamaan", b: "Memudahkan pemecahan masalah", c: "Memperbaiki hubungan interpersonal", d: "Menimbulkan prasangka buruk dan meningkatkan konflik" },
+                            correct: "d",
+                            userAnswer: null,
+                            explanation: "Tanpa husnuzan, seseorang akan mudah terjebak rasa curiga, merusak silaturahmi, dan memicu konflik."
+                        },
+                        {
+                            id: 8,
+                            question: "Husnuzan kepada Allah berarti....",
+                            options: { a: "Meragukan kebenaran ajaran agama", b: "Menyalahkan Allah atas setiap kesulitan yang terjadi", c: "Berprasangka baik terhadap keputusan dan takdir Allah", d: "Mengabaikan ibadah karena merasa hidup sudah cukup baik" },
+                            correct: "c",
+                            userAnswer: null,
+                            explanation: "Husnuzan kepada Allah adalah yakin bahwa seluruh keputusan dan takdir-Nya mengandung kebaikan."
+                        },
+                        {
+                            id: 9,
+                            question: "Husnuzan kepada sesama manusia dapat diwujudkan dengan:",
+                            options: { a: "Menilai orang lain hanya berdasarkan penampilan", b: "Mencari alasan positif untuk tindakan orang lain", c: "Selalu curiga terhadap niat orang lain", d: "Mengabaikan kebaikan orang lain" },
+                            correct: "b",
+                            userAnswer: null,
+                            explanation: "Husnuzan kepada sesama diwujudkan dengan selalu berprasangka positif atas niat orang lain."
+                        },
+                        {
+                            id: 10,
+                            question: "Husnuzan kepada diri sendiri artinya...",
+                            options: { a: "Mengabaikan semua kesalahan diri", b: "Menganggap diri sendiri selalu benar", c: "Merendahkan diri di hadapan orang lain", d: "Berprasangka baik dan menghargai usaha serta pencapaian diri sendiri" },
+                            correct: "d",
+                            userAnswer: null,
+                            explanation: "Husnuzan pada diri sendiri berarti optimis, percaya kemampuan diri, dan menghargai setiap usaha."
+                        },
+                        {
+                            id: 11,
+                            question: "Salah satu bentuk husnuzan dalam menghadapi kegagalan adalah:",
+                            options: { a: "Melihat kegagalan sebagai kesempatan untuk belajar dan berkembang", b: "Menganggap bahwa kegagalan adalah akhir dari segalanya", c: "Menyalahkan orang lain atas kegagalan tersebut", d: "Tidak pernah mencoba lagi setelah gagal" },
+                            correct: "a",
+                            userAnswer: null,
+                            explanation: "Memandang kegagalan sebagai sarana evaluasi dan tumbuh adalah wujud optimisme husnuzan."
+                        },
+                        {
+                            id: 12,
+                            question: "Husnuzan terhadap orang tua bisa ditunjukkan dengan:",
+                            options: { a: "Menolak nasihat mereka karena merasa sudah dewasa", b: "Berprasangka bahwa mereka tidak memahami situasi kita", c: "Menghargai dan menghormati pandangan serta nasihat mereka", d: "Menghindari interaksi dengan mereka karena perbedaan pandangan" },
+                            correct: "c",
+                            userAnswer: null,
+                            explanation: "Meyakini bahwa nasihat orang tua didasari rasa kasih sayang dan niat baik."
+                        },
+                        {
+                            id: 13,
+                            question: "Salah satu manfaat husnuzan kepada Allah adalah:",
+                            options: { a: "Meningkatkan rasa syukur dalam kehidupan", b: "Membuat seseorang merasa tidak perlu berusaha", c: "Mengembangkan sikap pesimis terhadap kehidupan", d: "Menghindari tanggung jawab pribadi" },
+                            correct: "a",
+                            userAnswer: null,
+                            explanation: "Berprasangka baik kepada Allah membuat hati selalu bersyukur atas nikmat dan hikmah dari-Nya."
+                        },
+                        {
+                            id: 14,
+                            question: "Husnuzan kepada Allah membantu seseorang untuk....",
+                            options: { a: "Menghindari doa karena merasa semuanya sudah ditakdirkan", b: "Mempercayai bahwa segala sesuatu yang terjadi memiliki hikmah", c: "Menyalahkan Allah atas setiap masalah yang dihadapi", d: "Merasa iri dengan kesuksesan orang lain" },
+                            correct: "b",
+                            userAnswer: null,
+                            explanation: "Orang yang berhusnuzan percaya tidak ada takdir Allah yang sia-sia, pasti ada hikmahnya."
+                        },
+                        {
+                            id: 15,
+                            question: "Dengan berhusnuzan kepada Allah, seseorang dapat......",
+                            options: { a: "Merasa putus asa ketika menghadapi cobaan", b: "Menjadi kurang berusaha dalam mencapai tujuan", c: "Mengabaikan kewajiban agama karena merasa cukup", d: "Menjalani kehidupan dengan lebih tenang dan penuh kepercayaan" },
+                            correct: "d",
+                            userAnswer: null,
+                            explanation: "Husnuzan mendatangkan ketenangan jiwa (thuma'ninah) dan rasa percaya pada ketetapan Allah."
+                        },
+                        {
+                            id: 16,
+                            question: "Salah satu dampak positif dari husnuzan kepada Allah adalah:",
+                            options: { a: "Mengurangi rasa cemas tentang masa depan", b: "Meningkatkan kekhawatiran terhadap hal-hal kecil", c: "Membuat seseorang merasa superior terhadap orang lain", d: "Menghalangi perkembangan pribadi karena terlalu pasrah" },
+                            correct: "a",
+                            userAnswer: null,
+                            explanation: "Keyakinan akan kebaikan Allah menghilangkan kecemasan berlebih atas masa depan."
+                        },
+                        {
+                            id: 17,
+                            question: "Berhusnuzan kepada Allah dapat membantu dalam:",
+                            options: { a: "Menolak kenyataan yang tidak sesuai harapan", b: "Menganggap bahwa segala usaha adalah sia-sia", c: "Mempertanyakan setiap keputusan ilahi secara kritis", d: "Memahami dan menerima qadar (takdir) dengan ikhlas" },
+                            correct: "d",
+                            userAnswer: null,
+                            explanation: "Husnuzan melatih jiwa untuk ikhlas dan ridha terhadap takdir dan ketentuan Allah."
+                        },
+                        {
+                            id: 18,
+                            question: "Salah satu cara mengamalkan husnuzan kepada Allah dalam kehidupan sehari-hari adalah....",
+                            options: { a: "Menyadari bahwa setiap kejadian memiliki hikmah dan kebaikan tersembunyi", b: "Menganggap semua musibah sebagai hukuman tanpa hikmah", c: "Meragukan kebaikan dari setiap kejadian yang terjadi", d: "Mengabaikan ajaran agama dalam situasi sulit" },
+                            correct: "a",
+                            userAnswer: null,
+                            explanation: "Selalu merenungi kebaikan dan pelajaran tersembunyi di balik tiap peristiwa."
+                        },
+                        {
+                            id: 19,
+                            question: "Untuk menunjukkan husnuzan kepada Allah, seseorang bisa......",
+                            options: { a: "Selalu mengeluh ketika menghadapi kesulitan", b: "Berdoa dan memohon petunjuk dalam setiap situasi", c: "Menyalahkan nasib dan orang lain atas semua masalah", d: "Menyerah tanpa mencoba mencari solusi" },
+                            correct: "b",
+                            userAnswer: null,
+                            explanation: "Memperbanyak doa menunjukkan kebergantungan dan prasangka baik bahwa Allah mendengarkan hamba-Nya."
+                        },
+                        {
+                            id: 20,
+                            question: "Berikut ini cara terbaik untuk mengembangkan husnuzan kepada Allah saat menghadapi ujian hidup adalah .....",
+                            options: { a: "Meninggalkan ibadah karena merasa putus asa", b: "Menolak untuk menerima bantuan dari orang lain", c: "Memperbanyak ibadah dan introspeksi diri", d: "Berpikir bahwa Allah tidak adil" },
+                            correct: "c",
+                            userAnswer: null,
+                            explanation: "Mendekatkan diri lewat ibadah dan introspeksi (muhasabah) memperkuat prasangka baik saat diuji."
+                        },
+                        {
+                            id: 21,
+                            question: "Cara lain untuk mengamalkan husnuzan kepada Allah adalah dengan...",
+                            options: { a: "Mengeluh tentang ketidakadilan dalam hidup", b: "Menerima takdir dengan lapang dada dan ikhlas", c: "Membandingkan nasib diri dengan orang lain secara negatif", d: "Mengabaikan hal-hal positif dalam hidup" },
+                            correct: "b",
+                            userAnswer: null,
+                            explanation: "Menerima ketetapan Allah dengan hati lapang adalah cermin husnuzan sejati."
+                        },
+                        {
+                            id: 22,
+                            question: "Saat menghadapi kesulitan, bagaimana husnuzan kepada Allah bisa diwujudkan?",
+                            options: { a: "Dengan terus mengingatkan diri bahwa Allah Maha Pengasih dan Maha Bijaksana", b: "Dengan berprasangka bahwa Allah tidak peduli dengan penderitaan kita", c: "Dengan menghindari doa karena merasa tidak ada gunanya", d: "Dengan menyalahkan takdir dan menolak berusaha" },
+                            correct: "a",
+                            userAnswer: null,
+                            explanation: "Mengingat sifat Rahman & Rahim Allah menguatkan prasangka baik saat ditimpa cobaan."
+                        },
+                        {
+                            id: 23,
+                            question: "Berikut ini yang menunjukkan perilaku husnuzan kepada Allah ketika menghadapi kegagalan adalah …",
+                            options: { a: "Menyalahkan Allah atas kegagalan yang terjadi", b: "Berhenti berusaha karena merasa nasib sudah ditentukan", c: "Merasa bahwa kegagalan adalah bentuk hukuman dari Allah", d: "Meyakini bahwa kegagalan tersebut adalah bagian dari rencana Allah yang lebih baik" },
+                            correct: "d",
+                            userAnswer: null,
+                            explanation: "Yakin bahwa rencana Allah lebih baik daripada keinginan manusia."
+                        },
+                        {
+                            id: 24,
+                            question: "Perilaku husnuzan kepada Allah dalam situasi sulit dapat diwujudkan dengan....",
+                            options: { a: "Merasa bahwa Allah tidak mendengar doa kita", b: "Mencari-cari kesalahan diri sendiri secara berlebihan", c: "Mengeluh terus-menerus tentang keadaan yang dihadapi", d: "Mempercayai bahwa ada hikmah di balik setiap ujian yang diberikan" },
+                            correct: "d",
+                            userAnswer: null,
+                            explanation: "Meyakini keberadaan hikmah menghindarkan kita dari rasa putus asa."
+                        },
+                        {
+                            id: 25,
+                            question: "Perilaku husnuzan kepada Allah dapat dilihat ketika seseorang:",
+                            options: { a: "Selalu khawatir dan cemas tentang masa depan tanpa alasan", b: "Menyikapi setiap kejadian dengan sikap positif dan percaya bahwa Allah memiliki rencana yang baik", c: "Mengeluh tentang segala sesuatu yang tidak sesuai harapan", d: "Menolak nasihat dan panduan agama karena merasa tidak relevan" },
+                            correct: "b",
+                            userAnswer: null,
+                            explanation: "Respon positif dan optimis terhadap rencana Allah adalah ciri utama insan yang berhusnuzan."
+                        }
+                    ],
+
+                    // 10 Soal Isian Singkat dari LKPD
+                    isianQuestions: [
+                        { question: "1. Husnuzan artinya...", hint: "Dua kata: berprasangka ...", correctAnswers: ["berprasangka baik", "prasangka baik", "berpikiran positif"], userAnswer: "", isChecked: false, isCorrect: false, showHint: false },
+                        { question: "2. Lawan dari suuzan adalah...", hint: "Lawan dari prasangka buruk", correctAnswers: ["husnuzan", "husnudzan"], userAnswer: "", isChecked: false, isCorrect: false, showHint: false },
+                        { question: "3. Sikap yang menganggap orang lain memiliki niat yang baik dan tulus termasuk husnuzan kepada....", hint: "Manusia / Teman / Orang lain", correctAnswers: ["sesama manusia", "orang lain", "sesama", "manusia"], userAnswer: "", isChecked: false, isCorrect: false, showHint: false },
+                        { question: "4. Cara melatih diri agar lebih mudah untuk berhusnudzan adalah .....", hint: "Berpikir ... / mencari sisi positif", correctAnswers: ["berpikir positif", "mencari sisi positif", "selalu berpikir positif"], userAnswer: "", isChecked: false, isCorrect: false, showHint: false },
+                        { question: "5. Keyakinan positif bahwa Allah Maha baik dan Maha Adil dalam keputusan-Nya termasuk husnuzan kepada ....", hint: "Sang Pencipta", correctAnswers: ["allah", "allah swt"], userAnswer: "", isChecked: false, isCorrect: false, showHint: false },
+                        { question: "6. Sifat yang tercantum dalam Al-Qur'an: Allah Maha Pengasih lagi Maha....", hint: "Lanjutan Ar-Rahman Ar-Rahim", correctAnswers: ["penyayang"], userAnswer: "", isChecked: false, isCorrect: false, showHint: false },
+                        { question: "7. Dalam kehidupan sehari-hari pedoman Islam bersumber pada Al-Qur'an dan....", hint: "Ajaran Nabi Muhammad SAW", correctAnswers: ["hadis", "hadits", "sunnah"], userAnswer: "", isChecked: false, isCorrect: false, showHint: false },
+                        { question: "8. Arti dari suuzan adalah....", hint: "Dua kata: berprasangka ...", correctAnswers: ["berprasangka buruk", "prasangka buruk", "berpikiran negatif"], userAnswer: "", isChecked: false, isCorrect: false, showHint: false },
+                        { question: "9. Akhlak Mahmudah disebut juga akhlak....", hint: "Lawan dari akhlak tercela", correctAnswers: ["terpuji", "baik", "mulia"], userAnswer: "", isChecked: false, isCorrect: false, showHint: false },
+                        { question: "10. Akhlak dibedakan menjadi .... jenis.", hint: "Mahmudah dan Mazmumah", correctAnswers: ["2", "dua"], userAnswer: "", isChecked: false, isCorrect: false, showHint: false }
+                    ]
+                }
+            },
+            computed: {
+                countAnsweredPg() {
+                    return this.pgQuestions.filter(q => q.userAnswer !== null).length;
+                },
+                countCorrectPg() {
+                    return this.pgQuestions.filter(q => q.userAnswer === q.correct).length;
+                },
+                countCorrectIsian() {
+                    return this.isianQuestions.filter(q => q.isCorrect).length;
+                }
+            },
+            methods: {
+                selectPgOption(qIndex, optionKey) {
+                    this.pgQuestions[qIndex].userAnswer = optionKey;
+                },
+                getPgOptionClass(qIndex, oKey) {
+                    const q = this.pgQuestions[qIndex];
+                    if (q.userAnswer === null) {
+                        return "bg-white border-slate-200 hover:border-emerald-400 hover:bg-emerald-50 text-slate-700";
+                    }
+                    if (oKey === q.correct) {
+                        return "bg-emerald-100 border-emerald-500 text-emerald-950 font-bold";
+                    }
+                    if (q.userAnswer === oKey) {
+                        return "bg-rose-100 border-rose-400 text-rose-950 font-semibold";
+                    }
+                    return "bg-slate-50 border-slate-200 text-slate-400 opacity-60";
+                },
+                getPgNavBadgeClass(i) {
+                    const q = this.pgQuestions[i];
+                    if (i === this.currentPgIndex) {
+                        return "bg-amber-400 text-emerald-950 ring-2 ring-emerald-600";
+                    }
+                    if (q.userAnswer === null) {
+                        return "bg-slate-100 text-slate-600 border border-slate-300";
+                    }
+                    if (q.userAnswer === q.correct) {
+                        return "bg-emerald-600 text-white";
+                    }
+                    return "bg-rose-500 text-white";
+                },
+                resetPgQuiz() {
+                    if (confirm("Apakah Anda yakin ingin mengulang kuis pilihan ganda?")) {
+                        this.pgQuestions.forEach(q => q.userAnswer = null);
+                        this.currentPgIndex = 0;
+                    }
+                },
+                checkIsian(q) {
+                    if (!q.userAnswer.trim()) return;
+                    const cleanUser = q.userAnswer.trim().toLowerCase();
+                    q.isCorrect = q.correctAnswers.some(ans => cleanUser.includes(ans) || ans.includes(cleanUser));
+                    q.isChecked = true;
+                },
+                calculatePgScore() {
+                    return Math.round((this.countCorrectPg / this.pgQuestions.length) * 100);
+                },
+                calculateIsianScore() {
+                    return Math.round((this.countCorrectIsian / this.isianQuestions.length) * 100);
+                },
+                getGrade() {
+                    const total = Math.round((this.calculatePgScore() + this.calculateIsianScore()) / 2);
+                    if (total >= 90) return 'Sangat Baik (A)';
+                    if (total >= 75) return 'Baik (B)';
+                    if (total >= 60) return 'Cukup (C)';
+                    return 'Perlu Latihan Lagi (D)';
+                },
+                getEncouragementText() {
+                    const score = Math.round((this.calculatePgScore() + this.calculateIsianScore()) / 2);
+                    if (score >= 90) return 'Luar biasa! Kamu telah menguasai konsep dan pengamalan sikap Husnuzan dengan sangat baik. Pertahankan akhlak mulia ini!';
+                    if (score >= 75) return 'Bagus sekali! Pemahamanmu tentang Husnuzan sudah mantap. Pelajari kembali beberapa pembahasan soal untuk hasil sempurna.';
+                    return 'Tetap semangat! Pelajari kembali materi modul dan flashcard di tab atas, lalu coba pengerjaan kuis sekali lagi!';
+                },
+                speakText(text) {
+                    if ('speechSynthesis' in window) {
+                        window.speechSynthesis.cancel();
+                        const utterance = new SpeechSynthesisUtterance(text);
+                        utterance.lang = 'id-ID';
+                        utterance.rate = 0.9;
+                        window.speechSynthesis.speak(utterance);
+                    } else {
+                        alert("Fitur narasi suara tidak didukung pada peramban web ini.");
+                    }
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>
